@@ -50,7 +50,7 @@ class WriteToCSV(object):
         if self.is_empty('apps.csv'):
             self.write_header('apps.csv',
                               ['id', 'url', 'title', 'developer', 'developer_link', 'icon', 'rating', 'reviews_count',
-                               'description_raw', 'description', 'tagline', 'pricing_hint', 'lastmod'])
+                               'description_raw', 'description', 'tagline', 'pricing_hint', 'lastmod', 'integrates_with'])
 
         if self.is_empty('reviews.csv'):
             self.write_header('reviews.csv',

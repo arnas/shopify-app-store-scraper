@@ -108,6 +108,11 @@ class AppStoreSpider(LastmodSpider):
         tagline = ' '.join(response.css('.vc-app-listing-hero__tagline ::text').extract()).strip()
         pricing_hint = response.css('.ui-app-pricing--format-detail ::text').extract_first(default='').strip()
 
+        integrates_with = []
+        for integrates_raw in response.css('.vc-app-listing-about-section__list-item'):
+            item = integrates_raw.css("li ::text").extract_first().strip()
+            integrates_with.append(item)
+
         for benefit in response.css('.vc-app-listing-key-values__item'):
             yield KeyBenefit(app_id=app_id,
                              title=benefit.css('.vc-app-listing-key-values__item-title ::text').extract_first().strip(),
@@ -145,7 +150,8 @@ class AppStoreSpider(LastmodSpider):
             description=description,
             tagline=tagline,
             pricing_hint=pricing_hint,
-            lastmod=response.meta['lastmod']
+            lastmod=response.meta['lastmod'],
+            integrates_with=",".join(list(dict.fromkeys(integrates_with)))
         )
 
     def parse_reviews(self, response, skip_if_first_scraped=False):

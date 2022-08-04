@@ -23,6 +23,7 @@ class App(scrapy.Item):
     icon = scrapy.Field()
     rating = scrapy.Field()
     reviews_count = scrapy.Field()
+    integrates_with = scrapy.Field()
     description_raw = scrapy.Field()
     description = scrapy.Field()
     tagline = scrapy.Field()
